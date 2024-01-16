@@ -9,10 +9,9 @@
   "scripts": {
     "build": "run-s build:*",
     "build:icons": "tsx ./other/build-icons.ts",
-    "build:remix": "remix build --sourcemap",
+    "build:remix": "remix build",
     "build:server": "tsx ./other/build-server.ts",
     "predev": "npm run build:icons --silent",
-    "dev": "remix dev -c \"node ./server/dev-server.js\" --manual",
     "prisma:studio": "prisma studio",
     "format": "prettier --write .",
     "lint": "eslint .",
@@ -27,7 +26,11 @@
     "test:e2e:run": "cross-env CI=true playwright test",
     "test:e2e:install": "npx playwright install --with-deps chromium",
     "typecheck": "tsc",
-    "validate": "run-p \"test -- --run\" lint typecheck test:e2e:run"
+    "validate": "run-p \"test -- --run\" lint typecheck test:e2e:run",
+    "build:worker": "remix-pwa build",
+    "dev": "run-p dev:*",
+    "dev:remix": "remix dev -c \"node ./server/dev-server.js\" --manual",
+    "dev:worker": "remix-pwa dev"
   },
   "eslintIgnore": [
     "/node_modules",
@@ -103,7 +106,12 @@
     "tailwindcss": "^3.4.0",
     "tailwindcss-animate": "^1.0.7",
     "tailwindcss-radix": "^2.8.0",
-    "zod": "^3.22.4"
+    "zod": "^3.22.4",
+    "@remix-pwa/cache": "^2.0.12",
+    "@remix-pwa/sw": "^2.1.12",
+    "@remix-pwa/strategy": "^2.1.9",
+    "@remix-pwa/client": "^2.0.1",
+    "@remix-pwa/sync": "^2.0.1"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.3.1",
@@ -151,7 +159,11 @@
     "tsx": "^4.6.0",
     "typescript": "^5.3.2",
     "vite": "^5.0.4",
-    "vitest": "^0.34.6"
+    "vitest": "^0.34.6",
+    "@remix-pwa/worker-runtime": "^2.0.8",
+    "@remix-pwa/dev": "2.0.31",
+    "remix-pwa": "^3.0.19",
+    "glob": "^10.3.10"
   },
   "engines": {
     "node": "20"

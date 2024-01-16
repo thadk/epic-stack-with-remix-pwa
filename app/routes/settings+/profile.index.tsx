@@ -85,7 +85,8 @@ const deleteDataActionIntent = 'delete-data'
 export async function action({ request }: ActionFunctionArgs) {
 	const userId = await requireUserId(request)
 	const formData = await request.formData()
-	await validateCSRF(formData, request.headers)
+	//https://remysharp.com/drafts/csrf-the-service-worker-challenge
+	// await validateCSRF(formData, request.headers)
 	const intent = formData.get('intent')
 	switch (intent) {
 		case profileUpdateActionIntent: {

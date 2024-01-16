@@ -1,5 +1,6 @@
 import { useForm } from '@conform-to/react'
 import { parse } from '@conform-to/zod'
+import { useSWEffect, LiveReload } from '@remix-pwa/sw'
 import { cssBundleHref } from '@remix-run/css-bundle'
 import {
 	json,
@@ -13,7 +14,7 @@ import {
 	Form,
 	Link,
 	Links,
-	LiveReload,
+	// LiveReload,
 	Meta,
 	Outlet,
 	Scripts,
@@ -24,6 +25,7 @@ import {
 	useMatches,
 	useSubmit,
 } from '@remix-run/react'
+
 import { withSentry } from '@sentry/remix'
 import { useRef } from 'react'
 import { AuthenticityTokenProvider } from 'remix-utils/csrf/react'
@@ -231,6 +233,7 @@ function App() {
 	const user = useOptionalUser()
 	const theme = useTheme()
 	const matches = useMatches()
+	useSWEffect()
 	const isOnSearchPage = matches.find(m => m.id === 'routes/users+/index')
 	const searchBar = isOnSearchPage ? null : <SearchBar status="idle" />
 	useToast(data.toast)

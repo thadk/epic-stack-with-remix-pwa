@@ -197,7 +197,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
 export async function action({ request }: ActionFunctionArgs) {
 	await requireAnonymous(request)
 	const formData = await request.formData()
-	await validateCSRF(formData, request.headers)
+	// https://remysharp.com/drafts/csrf-the-service-worker-challenge
+	// await validateCSRF(formData, request.headers)
 	checkHoneypot(formData)
 	const submission = await parse(formData, {
 		schema: intent =>
